@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacred Path Tarot</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      background: white;
+    }
+
+    nav .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #222;
+      margin-left: 20px;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 90px 20px 70px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 25px;
+      max-width: 550px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #222;
+      color: white;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .hero-image {
+      background: #f4f4f4;
+      border-radius: 20px;
+      min-height: 360px;
+      background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 70px 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: #555;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .box {
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 28px;
+      background: #fff;
+    }
+
+    .box h3 {
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      text-align: center;
+      background: #f8f8f8;
+      border-radius: 20px;
+      padding: 50px 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #666;
+      border-top: 1px solid #eee;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      nav {
+        padding: 18px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Sacred Path Tarot</div>
+    <div>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div>
+      <h1>Tarot readings for clarity, confidence, and direction.</h1>
+      <p>
+        Personal tarot sessions in a calm, welcoming setting. Designed to help you reflect,
+        ask better questions, and move forward with more clarity.
+      </p>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
+    <div class="hero-image"></div>
+  </div>
+
+  <section id="services">
+    <h2>Services</h2>
+    <p class="intro">Simple, personal readings tailored to what you need most.</p>
+    <div class="grid">
+      <div class="box">
+        <h3>Mini Reading</h3>
+        <p>A short session for one key question or situation.</p>
+      </div>
+      <div class="box">
+        <h3>Full Reading</h3>
+        <p>A longer session exploring relationships, life direction, and personal growth.</p>
+      </div>
+      <div class="box">
+        <h3>Follow-Up Session</h3>
+        <p>A return session for clients who want to reflect further or check in again.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p class="intro">
+      Sacred Path Tarot offers supportive and intuitive readings with a grounded,
+      respectful approach. The focus is on helping people pause, reflect, and gain
+      useful insight into the path ahead.
+    </p>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <h2>Contact</h2>
+      <p>Email: <strong>hello@sacredpathtarot.com</strong></p>
+      <p>Available for private readings by appointment.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Sacred Path Tarot. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
