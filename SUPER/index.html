@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacred Path Tarot | Katherine Murphy | Cork City</title>
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --bg-soft: #111214;
+      --panel: rgba(19, 19, 22, 0.88);
+      --panel-strong: #15161a;
+      --gold: #c9a86a;
+      --gold-soft: #e8d2a6;
+      --text: #f5f1e8;
+      --muted: #b9b1a3;
+      --line: rgba(201, 168, 106, 0.18);
+      --shadow: 0 20px 60px rgba(0,0,0,0.55);
+      --radius: 22px;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(201,168,106,0.08), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(201,168,106,0.06), transparent 24%),
+        linear-gradient(180deg, #080809 0%, #0c0d10 45%, #09090a 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(8, 8, 10, 0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201, 168, 106, 0.08);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-family: Georgia, serif;
+      letter-spacing: 1px;
+      font-size: 1.2rem;
+      color: var(--gold-soft);
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 0.84rem;
+      letter-spacing: 0.4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-soft);
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,168,106,0.35);
+      color: var(--gold-soft) !important;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 88px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      border: 1px solid rgba(201,168,106,0.22);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: rgba(201,168,106,0.05);
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-family: Georgia, serif;
+      font-size: clamp(2.8rem, 5vw, 5.4rem);
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      max-width: 740px;
+    }
+
+    .hero p {
+      margin: 0 0 28px;
+      max-width: 600px;
+      font-size: 1.06rem;
+      color: var(--muted);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d8ba7c 0%, #b78b42 100%);
+      color: #16120b;
+      box-shadow: 0 10px 30px rgba(183, 139, 66, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(201,168,106,0.24);
+      color: var(--gold-soft);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* HERO CARD */
+    .feature-panel {
+      position: relative;
+      min-height: 590px;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(24,24,28,0.96), rgba(13,13,15,0.98)),
+        radial-gradient(circle at top, rgba(201,168,106,0.1), transparent 35%);
+      border: 1px solid rgba(201,168,106,0.18);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 34px;
+    }
+
+    .feature-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(201,168,106,0.08), transparent 22%),
+        radial-gradient(circle at 80% 80%, rgba(201,168,106,0.07), transparent 24%);
+      pointer-events: none;
+    }
+
+    .feature-top {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 28px;
+    }
+
+    .feature-label {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 0.75rem;
+      margin-bottom: 14px;
+    }
+
+    .feature-top h2 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    .feature-top p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 440px;
+    }
+
+    .card-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .tarot-card {
+      min-height: 250px;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(201,168,106,0.16);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+
+    .tarot-card .small {
+      color: var(--gold);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .tarot-card .symbol {
+      font-size: 2.5rem;
+      color: var(--gold-soft);
+    }
+
+    .tarot-card .name {
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 86px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 500;
+      color: var(--gold-soft);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    /* PANELS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      margin: 0 0 14px;
+      color: var(--gold-soft);
+      font-family: Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 500;
+    }
+
+    .panel p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .detail-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding-top: 14px;
+      border-top: 1px solid rgba(201,168,106,0.1);
+    }
+
+    .detail-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .detail-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(201,168,106,0.08);
+      border: 1px solid rgba(201,168,106,0.16);
+      color: var(--gold-soft);
+      font-weight: 700;
+    }
+
+    .detail-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* SERVICES */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service {
+      background: linear-gradient(180deg, rgba(22,23,26,0.95), rgba(14,15,17,0.98));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.8;
+    }
+
+    .service .tag {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+
+    .service h3 {
+      margin: 0 0 8px;
+      font-family: Georgia, serif;
+      font-size: 1.55rem;
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .service p,
+    .service li {
+      color: var(--muted);
+    }
+
+    .service ul {
+      padding-left: 18px;
+      margin: 0 0 24px;
+    }
+
+    .service li {
+      margin-bottom: 10px;
+    }
+
+    .service .btn {
+      background: transparent;
+      border: 1px solid rgba(201,168,106,0.28);
+      color: var(--gold-soft);
+      text-align: center;
+      width: 100%;
+    }
+
+    /* TESTIMONIALS */
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .quote {
+      background: rgba(16,16,18,0.88);
+      border: 1px solid rgba(201,168,106,0.12);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .quote-mark {
+      font-size: 2.2rem;
+      color: var(--gold);
+      font-family: Georgia, serif;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .quote p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .quote strong {
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+    }
+
+    .contact-main {
+      background:
+        linear-gradient(180deg, rgba(21,22,25,0.98), rgba(11,12,13,0.98));
+      border: 1px solid rgba(201,168,106,0.16);
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-main h2 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+      font-size: 2.2rem;
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+
+    .contact-main p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-item {
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(201,168,106,0.12);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .contact-item span {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .contact-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .contact-side {
+      background: rgba(18,19,22,0.92);
+      border: 1px solid rgba(201,168,106,0.12);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-side h3 {
+      margin: 0 0 14px;
+      font-family: Georgia, serif;
+      color: var(--gold-soft);
+      font-size: 1.45rem;
+      font-weight: 500;
+    }
+
+    .contact-side p {
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .hours {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(201,168,106,0.08);
+      color: var(--muted);
+    }
+
+    .hours-row strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 30px 0 44px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid rgba(201,168,106,0.1);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1050px) {
+      .hero-grid,
+      .grid-2,
+      .services,
+      .quotes,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-panel {
+        min-height: unset;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel,
+      .service,
+      .quote,
+      .contact-main,
+      .contact-side,
+      .feature-panel {
+        padding: 24px;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-title">Sacred Path Tarot</div>
+        <div class="brand-sub">Katherine Murphy · Cork City</div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Readings</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact" class="nav-cta">Book Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Private Tarot Readings · Cork City</div>
+        <h1>Elegant guidance in a darker, quieter setting.</h1>
+        <p>
+          Sacred Path Tarot offers one-to-one tarot readings with a calm, refined atmosphere.
+          Designed for reflection rather than spectacle, each session gives space for clarity,
+          honesty, and a deeper look at what lies ahead.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Book a Reading</a>
+          <a href="#services" class="btn btn-secondary">View Services</a>
+        </div>
+
+        <div class="hero-meta">
+          <span>Personal sessions</span>
+          <span>Dark luxury aesthetic</span>
+          <span>In-person or remote</span>
+        </div>
+      </div>
+
+      <div class="feature-panel">
+        <div class="feature-top">
+          <div class="feature-label">A premium private practice</div>
+          <h2>Readings with Katherine Murphy</h2>
+          <p>
+            A more intimate tarot experience with a polished, high-end feel —
+            quietly atmospheric, grounded in conversation, and centred on real personal insight.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <div class="tarot-card">
+            <div class="small">Card One</div>
+            <div class="symbol">✦</div>
+            <div class="name">The Star</div>
+          </div>
+          <div class="tarot-card">
+            <div class="small">Card Two</div>
+            <div class="symbol">☾</div>
+            <div class="name">The Moon</div>
+          </div>
+          <div class="tarot-card">
+            <div class="small">Card Three</div>
+            <div class="symbol">♛</div>
+            <div class="name">The Empress</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <h2>A more refined tarot experience</h2>
+        <p>
+          Sacred Path Tarot blends intuition, conversation, and quiet atmosphere into a reading style
+          that feels personal, composed, and genuinely supportive.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>About the practice</h3>
+          <p>
+            Sacred Path Tarot is based in Cork City and offers thoughtfully delivered tarot readings
+            for those looking for insight around relationships, life direction, timing, or moments of uncertainty.
+          </p>
+          <p>
+            Led by <strong>Katherine Murphy</strong>, the practice is designed to feel calm, elegant,
+            and reassuring — something closer to a private consultation than a performance.
+          </p>
+          <p>
+            The aim is not to overwhelm, but to help clients slow down, reflect, and leave with a clearer sense
+            of what matters most.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>What makes it different</h3>
+          <div class="detail-list">
+            <div class="detail-item">
+              <div class="detail-icon">1</div>
+              <div>
+                <strong>Quiet luxury feel</strong>
+                A darker visual style with a more polished, intimate atmosphere.
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">2</div>
+              <div>
+                <strong>Grounded guidance</strong>
+                Insightful readings focused on reflection, clarity, and perspective.
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">3</div>
+              <div>
+                <strong>Subtle Cork warmth</strong>
+                Welcoming, calm, and personal without ever feeling overly formal.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Reading options</h2>
+        <p>
+          Three simple offerings, each designed to feel personal, private, and carefully paced.
+        </p>
+      </div>
+
+      <div class="services">
+        <div class="service">
+          <div class="tag">Focused Session</div>
+          <h3>Mini Reading</h3>
+          <div class="price">€40</div>
+          <p>A shorter reading for one question, one crossroads, or one area needing clarity.</p>
+          <ul>
+            <li>Approx. 30 minutes</li>
+            <li>Ideal for first-time clients</li>
+            <li>Clear and focused guidance</li>
+          </ul>
+          <a href="#contact" class="btn">Book Mini Reading</a>
+        </div>
+
+        <div class="service">
+          <div class="tag">Signature Experience</div>
+          <h3>Full Reading</h3>
+          <div class="price">€70</div>
+          <p>A longer, more complete session with time to explore multiple themes in depth.</p>
+          <ul>
+            <li>Approx. 60 minutes</li>
+            <li>Space for several questions</li>
+            <li>Most popular option</li>
+          </ul>
+          <a href="#contact" class="btn">Book Full Reading</a>
+        </div>
+
+        <div class="service">
+          <div class="tag">Returning Clients</div>
+          <h3>Follow-Up</h3>
+          <div class="price">€50</div>
+          <p>A reflective return session to revisit themes, changes, and the next steps ahead.</p>
+          <ul>
+            <li>Approx. 40 minutes</li>
+            <li>For previous clients</li>
+            <li>Supportive and grounded</li>
+          </ul>
+          <a href="#contact" class="btn">Book Follow-Up</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <h2>Client reflections</h2>
+        <p>
+          A few examples of the kind of experience Sacred Path Tarot aims to create.
+        </p>
+      </div>
+
+      <div class="quotes">
+        <div class="quote">
+          <div class="quote-mark">“</div>
+          <p>
+            Beautiful setting, very calm energy, and a reading that felt genuinely insightful.
+            It was polished and professional while still being very personal.
+          </p>
+          <strong>— Aoife, Cork</strong>
+        </div>
+
+        <div class="quote">
+          <div class="quote-mark">“</div>
+          <p>
+            Katherine has a lovely way of speaking through the cards. Nothing felt rushed,
+            and I came away with much more clarity than I expected.
+          </p>
+          <strong>— Niamh, Douglas</strong>
+        </div>
+
+        <div class="quote">
+          <div class="quote-mark">“</div>
+          <p>
+            The whole thing felt elegant and reassuring rather than dramatic.
+            It gave me space to think properly about where I’m headed.
+          </p>
+          <strong>— Sarah, Ballincollig</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact-grid">
+      <div class="contact-main">
+        <h2>Book a private reading</h2>
+        <p>
+          To enquire about availability or arrange a session, get in touch directly with Katherine Murphy.
+        </p>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <span>Point of Contact</span>
+            <strong>Katherine Murphy</strong>
+          </div>
+          <div class="contact-item">
+            <span>Phone</span>
+            <strong>021 463 7821</strong>
+          </div>
+          <div class="contact-item">
+            <span>Email</span>
+            <strong>hello@sacredpathtarot.ie</strong>
+          </div>
+          <div class="contact-item">
+            <span>Address</span>
+            <strong>18 Washington Street, Cork City, T12 RK24, Ireland</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-side">
+        <h3>Availability</h3>
+        <p>
+          Sessions are offered by appointment in Cork City, with selected remote bookings also available.
+        </p>
+
+        <div class="hours">
+          <div class="hours-row">
+            <strong>Monday</strong>
+            <span>11:00 – 17:00</span>
+          </div>
+          <div class="hours-row">
+            <strong>Tuesday</strong>
+            <span>11:00 – 17:00</span>
+          </div>
+          <div class="hours-row">
+            <strong>Wednesday</strong>
+            <span>12:00 – 19:00</span>
+          </div>
+          <div class="hours-row">
+            <strong>Thursday</strong>
+            <span>12:00 – 19:00</span>
+          </div>
+          <div class="hours-row">
+            <strong>Friday</strong>
+            <span>10:00 – 16:00</span>
+          </div>
+          <div class="hours-row">
+            <strong>Saturday</strong>
+            <span>By appointment</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Sacred Path Tarot</div>
+      <div>Katherine Murphy · Cork City, Ireland</div>
+    </div>
+  </footer>
+
+</body>
+</html>
